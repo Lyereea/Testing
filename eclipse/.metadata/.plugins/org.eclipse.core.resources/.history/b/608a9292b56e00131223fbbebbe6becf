@@ -1,0 +1,12 @@
+package micah.testingmod.bloodtree;
+
+import net.minecraft.block.Block;
+
+
+public class BloodWood {
+
+	public BloodWood() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

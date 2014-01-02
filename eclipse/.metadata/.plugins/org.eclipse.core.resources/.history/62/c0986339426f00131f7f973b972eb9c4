@@ -1,0 +1,24 @@
+package micah.testingmod;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemSword;
+
+public class BlairzariumSword {
+
+	//public BlairzariumSword(int id, EnumToolMaterial blairzar) {
+		//super(id, blairzar);
+		
+	//}
+
+	public BlairzariumSword(int id, EnumToolMaterial blairzar) {
+		//super(id, blairzar);
+	}
+
+	public Item setCreativeTab(CreativeTabs tabcombat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

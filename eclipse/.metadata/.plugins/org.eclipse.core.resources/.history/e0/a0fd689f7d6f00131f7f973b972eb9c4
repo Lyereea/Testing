@@ -1,0 +1,7 @@
+package micah.testingmod.Item;
+
+import net.minecraft.item.ItemHoe;
+
+public class EldaricHoe extends ItemHoe {
+
+}

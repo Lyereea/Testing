@@ -1,0 +1,21 @@
+package micah.testingmod.item;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
+
+
+public class BlairzariumSword extends ItemSword {
+
+	public BlairzariumSword(int id, EnumToolMaterial par2EnumToolMaterial) {
+		super(id, par2EnumToolMaterial);
+
+	}
+	
+	 public boolean hasEffect(ItemStack par1ItemStack){
+		 return true;
+		 }
+	
+}

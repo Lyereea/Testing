@@ -1,0 +1,22 @@
+package micah.testingmod.item;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+
+
+public class BlairzariumSword extends ItemSword {
+
+	public BlairzariumSword(int id, EnumToolMaterial par2EnumToolMaterial) {
+		super(id, par2EnumToolMaterial);
+
+	}
+	
+	 public boolean hitEntity(ItemStack itemstack, EntityLiving entityliving, EntityLiving entityliving1)
+	 {
+	 entityliving.setFire(5);
+	 return true;
+	 }
+
+}

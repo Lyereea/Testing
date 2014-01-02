@@ -1,0 +1,26 @@
+package micah.testingmod.item;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.world.World;
+
+
+public class BlairzariumSword extends ItemSword {
+
+	public BlairzariumSword(int id, EnumToolMaterial par2EnumToolMaterial) {
+		super(id, par2EnumToolMaterial);
+
+	}
+	
+	public void onUpdate(ItemStack itemstack, World par2World, Entity par3Entity, int par4, boolean par5)
+	{
+	if(itemstack.isItemEnchanted() == false)
+	{
+	itemstack.addEnchantment(Enchantment.fireAspect, 2);
+	}
+	}
+	
+}

@@ -1,0 +1,168 @@
+package micah.testingmod;
+ 
+import micah.testingmod.bloodtree.BloodBlock;
+import micah.testingmod.BlairzariumSword;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+ 
+@Mod(modid=TestingModInfo.ID, name=TestingModInfo.NAME, version=TestingModInfo.VERS)
+@NetworkMod(clientSideRequired=true, serverSideRequired=false)
+public class TestingMod {
+		
+	public EnumToolMaterial blairzar = EnumHelper.addToolMaterial("Blairzarium", 2, 475, 5.0f, 2.0f, 20);
+	
+	private final Item blairzariumSword = new BlairzariumSword(2440, blairzar).setMaxStackSize(1).setCreativeTab(CreativeTabs.tabCombat).setMaxDamage(5).setUnlocalizedName("Blairzarium Sword").setTextureName(TestingModInfo.NAME.toLowerCase() + ":blairzariumsword"); // Starting to create a sword for the blairzarium stuff.
+	
+	public final static Block blairzariumBlock = new BlairzariumBlock(2651, Material.rock).setUnlocalizedName("blairzariumBlock").setTextureName(TestingModInfo.NAME.toLowerCase() + ":blairzariumblock");
+	
+	public final static Block blairzariumOre = new BlairzariumBlock(2650, Material.rock).setUnlocalizedName("blairzariumOre").setTextureName(TestingModInfo.NAME.toLowerCase() + ":blairzariumore"); // Tryout ore for modding, to make sure I know how to do it.	
+	public final static Block zurtainiumOre = new ZurtainiumBlock(2652, Material.rock).setUnlocalizedName("zurtainiumOre").setTextureName(TestingModInfo.NAME.toLowerCase() + ":zurtainiumore");
+	public final static Block eldaricOre = new EldaricBlock(2655, Material.rock).setUnlocalizedName("eldaricOre").setTextureName(TestingModInfo.NAME.toLowerCase() + ":eldaricore");
+	
+	public final static Item blairzariumIngot = new BlairzariumItem(2433).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("blairzariumIngot").setTextureName(TestingModInfo.NAME.toLowerCase() + ":blairzariumingot" ); // Tryout item for modding, to make sure I know how to do it.
+	public final static Item zurtainiumIngot = new ZurtainiumItem(2435).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("zurtainiumIngot").setTextureName(TestingModInfo.NAME.toLowerCase() + ":zurtainiumingot");
+	public final static Item eldaricIngot = new EldaricItem(2437).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("eldaricIngot").setTextureName(TestingModInfo.NAME.toLowerCase() + ":eldaricingot");
+
+	public final static Item blairzariumNugget = new BlairzariumItem(2434).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("blairzariumNugget").setTextureName(TestingModInfo.NAME.toLowerCase() + ":blairzariumnugget"); // Code for my blairzarium nugget.
+	public final static Item zurtainiumNugget = new ZurtainiumItem(2436).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("zurtainiumNugget").setTextureName(TestingModInfo.NAME.toLowerCase() + ":zurtainiumnugget");
+	public final static Item eldaricNugget = new EldaricItem(2438).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMaterials).setUnlocalizedName("eldaricNugget").setTextureName(TestingModInfo.NAME.toLowerCase() + ":eldaricnugget");
+
+	//Blood tree blocks
+	public final static Block bloodLeaf = new BloodBlock(2649, Material.leaves).setUnlocalizedName("bloodLeaf").setTextureName(TestingModInfo.NAME.toLowerCase() + ":bloodleaf").setLightOpacity(1).setLightValue(1.5f);
+	public final static Block bloodWood = new BloodBlock(2648, Material.leaves).setUnlocalizedName("bloodWood").setTextureName(TestingModInfo.NAME.toLowerCase() + ":bloodwood").setLightOpacity(1).setLightValue(1.5f);	
+	
+	EventManager oreManager = new EventManager();
+	TreeManager treeManager = new TreeManager();
+	
+        // The instance of your mod that Forge uses.
+        @Instance(TestingModInfo.NAME)
+        public static TestingMod instance;
+       
+        // Says where the client and server 'proxy' code is loaded.
+        @SidedProxy(clientSide=TestingModInfo.CLIENTPROXY + "ClientProxy", serverSide=TestingModInfo.COMMONPROXY + "CommonProxy")
+        public static CommonProxy proxy;
+       
+        @EventHandler
+        public void preInit(FMLPreInitializationEvent event) {
+                // Stub Method
+        }
+       
+        @EventHandler
+        public void load(FMLInitializationEvent event) {
+                proxy.registerRenderers();
+                
+                ItemStack ironIngot = new ItemStack(Item.ingotIron);
+                ItemStack blazePowder = new ItemStack(Item.blazePowder);
+                ItemStack stick = new ItemStack(Item.stick);
+                ItemStack diamond = new ItemStack(Item.diamond);
+
+
+                
+                // The code below will be for my Mod stuff.
+                                  
+                // Code for ore, can change things later on. 
+                GameRegistry.registerBlock(blairzariumOre, "blairzariumOre");
+                LanguageRegistry.addName(blairzariumOre, "Blairzarium Ore");
+                MinecraftForge.setBlockHarvestLevel(blairzariumOre, "pickaxe", 2); // Harvesting levels: 0=wood, 1=stone, 2=iron, 3=diamond
+              
+                GameRegistry.registerBlock(blairzariumBlock, "blairzariumBlock"); // Blairzarium block
+                LanguageRegistry.addName(blairzariumBlock, "Blairzarium Block");
+                MinecraftForge.setBlockHarvestLevel(blairzariumBlock, "pickaxe", 2); 
+                
+                GameRegistry.registerBlock(zurtainiumOre, "zurtainiumOre");
+                LanguageRegistry.addName(zurtainiumOre, "Zurtainium Ore");
+                MinecraftForge.setBlockHarvestLevel(zurtainiumOre, "pickaxe", 2);
+                
+                GameRegistry.registerBlock(eldaricOre, "eldaricOre");
+                LanguageRegistry.addName(eldaricOre, "Eldaric Ore");
+                MinecraftForge.setBlockHarvestLevel(eldaricOre, "pickaxe", 3);
+                
+                //For my blood trees, may keep or scrap
+                GameRegistry.registerBlock(bloodLeaf, "bloodLeaf");
+                LanguageRegistry.addName(bloodLeaf, "Blood Leaf");
+                
+                GameRegistry.registerBlock(bloodWood, "bloodWood");
+                LanguageRegistry.addName(bloodWood, "Blood Wood");
+                
+                GameRegistry.registerItem(blairzariumSword, "blairzariumSword"); // Blairzarium Sword
+                LanguageRegistry.addName(blairzariumSword, "Blairzarium Sword");
+                
+                GameRegistry.registerItem(blairzariumNugget, "BlairzariumNugget");
+                LanguageRegistry.addName(blairzariumNugget, "Blairzarium Nugget");
+                
+                GameRegistry.registerItem(blairzariumIngot, "blairzariumIngot");
+                LanguageRegistry.addName(blairzariumIngot, "Blairzarium Ingot");
+                
+                GameRegistry.registerItem(zurtainiumNugget, "zurtainiumNugget");
+                LanguageRegistry.addName(zurtainiumNugget, "Zurtainium Nugget");
+                
+                GameRegistry.registerItem(zurtainiumIngot, "zurtainiumIngot");
+                LanguageRegistry.addName(zurtainiumIngot, "Zurtainium Ingot");
+                
+                GameRegistry.registerItem(eldaricIngot, "eldaricIngot");
+                LanguageRegistry.addName(eldaricIngot, "Eldaric Ingot");
+                
+                GameRegistry.registerItem(eldaricNugget, "eldaricNugget");
+                LanguageRegistry.addName(eldaricNugget, "Eldaric Nugget");
+                
+                ItemStack blairzariumBlock = new ItemStack(TestingMod.blairzariumBlock);
+                ItemStack blairzariumOre = new ItemStack(TestingMod.blairzariumOre);
+                ItemStack zurtainiumOre = new ItemStack(TestingMod.zurtainiumOre);                
+                ItemStack blairzariumSword = new ItemStack(TestingMod.blairzariumSword);
+                ItemStack blairzariumNugget = new ItemStack(TestingMod.blairzariumNugget);
+                ItemStack blairzariumNuggetTwo = new ItemStack(TestingMod.blairzariumNugget, 2);
+                ItemStack blairzariumIngotMore = new ItemStack(TestingMod.blairzariumIngot, 9);
+                ItemStack blairzariumIngot = new ItemStack(TestingMod.blairzariumIngot); // Blairzarium Ingot!!!!
+                ItemStack zurtainiumIngot = new ItemStack(TestingMod.zurtainiumIngot); // Zurtainium Ingot!!!!
+                ItemStack zurtainiumNugget = new ItemStack(TestingMod.zurtainiumNugget);
+                ItemStack zurtainiumNuggetTwo = new ItemStack(TestingMod.zurtainiumNugget, 2);
+                ItemStack eldaricIngot = new ItemStack(TestingMod.eldaricIngot);
+                ItemStack eldaricNugget = new ItemStack(TestingMod.eldaricNugget);
+                ItemStack eldaricNuggetTwo = new ItemStack(TestingMod.eldaricNugget, 2);
+                
+                GameRegistry.addRecipe(blairzariumIngot, "xxx", "xyx", "xxx",
+                		'x', blairzariumNugget, 'y', ironIngot);
+                GameRegistry.addShapelessRecipe(blairzariumIngotMore, blairzariumBlock);
+                GameRegistry.addRecipe(blairzariumBlock, "xxx", "xxx", "xxx",
+                		'x', blairzariumIngot);
+                GameRegistry.addRecipe(eldaricIngot, "eze", "bib", "eze",
+                		'e', eldaricNugget, 'i', ironIngot, 'b', blairzariumIngot, 'z', zurtainiumIngot);
+                GameRegistry.addRecipe(eldaricIngot, "ebe", "ziz", "ebe",
+                		'e', eldaricNugget, 'i', ironIngot, 'b', blairzariumIngot, 'z', zurtainiumIngot);
+              GameRegistry.addRecipe(blairzariumSword, " x ", " x ", " y ",
+                		'x', blairzariumIngot, 'y', ironIngot);
+                GameRegistry.addRecipe(zurtainiumIngot, "xxx", "xyx", "xxx",
+                		'x', zurtainiumNugget, 'y', ironIngot);
+                
+                GameRegistry.addSmelting(TestingMod.blairzariumOre.blockID, blairzariumNuggetTwo, 16.0f);
+                GameRegistry.addSmelting(TestingMod.zurtainiumOre.blockID, zurtainiumNuggetTwo, 16.0f);
+                GameRegistry.addSmelting(TestingMod.eldaricOre.blockID, eldaricNuggetTwo, 32.0f);
+                
+                // World Gen code
+                GameRegistry.registerWorldGenerator(oreManager);
+                GameRegistry.registerWorldGenerator(treeManager);
+                
+        }
+       
+        @EventHandler
+        public void postInit(FMLPostInitializationEvent event) {
+                // Stub Method
+        }
+       
+}

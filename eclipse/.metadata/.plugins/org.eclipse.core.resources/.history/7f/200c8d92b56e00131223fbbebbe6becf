@@ -1,0 +1,9 @@
+package micah.testingmod.bloodtree;
+
+public class BloodWood {
+
+	public BloodWood() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

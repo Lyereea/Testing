@@ -1,0 +1,13 @@
+package micah.testingmod;
+
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemSword;
+
+public class BlairzariumSword extends ItemSword {
+
+	public BlairzariumSword(int id, EnumToolMaterial par2EnumToolMaterial) {
+		super(id, par2EnumToolMaterial);
+
+	}
+
+}

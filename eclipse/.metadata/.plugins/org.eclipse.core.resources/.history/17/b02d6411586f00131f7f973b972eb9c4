@@ -1,0 +1,13 @@
+package micah.testingmod.Item;
+
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemSpade;
+
+public class ZuratiniumSpade extends ItemSpade {
+
+	public ZuratiniumSpade(int id, EnumToolMaterial zurtain) {
+		super(id, zurtain);
+		
+	}
+
+}

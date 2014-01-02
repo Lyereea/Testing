@@ -1,0 +1,13 @@
+package micah.testingmod;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+
+public class EldaricBlock extends Block {
+
+	public EldaricBlock(int id, Material material) {
+		super(id, material);
+		
+	}
+
+}
