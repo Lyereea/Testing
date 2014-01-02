@@ -1,7 +1,0 @@
-package micah.testingmod;
-
-import net.minecraft.ItemPickaxe;
-
-public class EldaricPickaxe extends ItemPickaxe {
-
-}

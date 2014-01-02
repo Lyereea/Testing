@@ -1,9 +1,0 @@
-package micah.testingmod.bloodtree;
-
-public class BloodBlock {
-
-	public BloodBlock() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
